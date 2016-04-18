@@ -1,0 +1,22 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      </button>
+      <a class="navbar-brand" href="#">flashcardsMDB</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <p class="user-name" ng-model="name">{{name}}</p>
+        <a class="logout-btn" ng-show="logoutButton" ng-click="logout()">Logout</a>
+        <form ng-show="!loggedIn" ng-submit="login()">
+          <li>Login: <input ng-model="username" name="text" type="text"></li>
+          <li>Password: <input ng-model="password" name="text" type="text"></li>
+          <input ng-show="false"class="submit-btn"type="submit" id="submit" value="Submit" />
+          <a class="login-create-text" ng-model="signup" ng-click="textHandler()">{{signupText}}</a>
+          <a class="login-create-text" ng-model="login" ng-click="textHandler()">{{loginText}}</a>
+        </form>
+        <p ng-model="errorText">{{errorText}}</p>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container-fluid -->
+</nav>
