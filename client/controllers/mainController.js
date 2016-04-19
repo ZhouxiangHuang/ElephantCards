@@ -7,14 +7,17 @@ function MainController($scope, $state, DeckFactory, UserFactory) {
   $scope.currentView = 'createdDecks';
   //  Retrieves an array of the user's decks from the factory
   $scope.getAllDecks = function() {
-    DeckFactory.getAllDecks()
-      .then(function(result) {
+    DeckFactory.getAllDecks(UserFactory.currentUser)
+      .then(result => {
         $scope.decks = result;
+        DeckFactory.userDecks = result;
+        $scope.$apply($scope.decks);
     });
   }
 
   //  Select new deck to load into factory, then redirect to test page
   $scope.setDeck = function(index) {
+    console.log('index: ', index);
     DeckFactory.setDeck(index)
       .then(function() {
         $state.go('test');
@@ -29,7 +32,9 @@ function MainController($scope, $state, DeckFactory, UserFactory) {
 
   //Receives broadcast
   $scope.$on('handleBroadcast', function(event, status) {
+
     $scope.currentView = status;
+    $scope.getAllDecks();
   });
 
 

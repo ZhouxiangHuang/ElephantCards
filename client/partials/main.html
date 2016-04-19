@@ -9,7 +9,7 @@
       <span class="desc">This is a description of the deck</span>
     </li>
     <li ng-repeat='deck in decks'>
-      <div ng-click="currentDeck()" class="deckName link" ng-click="setDeck($index)">{{ deck.deckname }}</div>
+      <div ng-click="currentDeck(); setDeck($index)" class="deckName link" >{{ deck.deckname.toUpperCase() }}</div>
       <span class="desc">{{ deck.description }}</span>
     </li>
   </ul>

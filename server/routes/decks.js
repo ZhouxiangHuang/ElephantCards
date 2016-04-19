@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const Sequelize = require('sequelize');
-const connection = new Sequelize('potato', 'potato123', '123', {
+const connection = new Sequelize('elephantdb', 'dumbo', 'peanuts', {
   host: 'localhost',
   dialect: 'postgres',
 });
@@ -15,6 +15,7 @@ var Decks = connection.define('decks', {
 
 // create a new deck, insert into postgres
 router.post('/create', function(req,res) {
+  console.log('does this even happen: ', req.body)
 	connection.sync().then(function() {
 		Decks.create({
 			username: req.body.username,
@@ -52,17 +53,16 @@ router.post(function(req,res) {
 
 // read all decks of 1 user
 router.post('/', function(req, res) {
-	console.log(req.body);
-	// Decks.findAll({
-	// 	where: {
-	// 		username: req.body.username
-	// 	}
-	// }).then(function(decksObj) {
-	// 	console.log(decksObj)
-	// 	// res.send()
-	// }).catch(function(error) {
-	// 			 console.error(error);
-	// })
+	console.log('router.post req.body: ', req.body.username);
+	Decks.findAll({
+		where: {
+			username: req.body.username
+		}
+	}).then(function(decksObj) {
+    res.send(decksObj)
+	}).catch(function(error) {
+				 console.error(error);
+	})
 });
 
 // INPUT: deleteDeck(32);

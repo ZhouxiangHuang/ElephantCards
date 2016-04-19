@@ -106,7 +106,7 @@ body {
 
 #deckTable {
   margin: 100px auto 0;
-  border: 1px solid #000;
+  border: 4px solid #000;
   width: 700px;
   height: 500px;
 }
@@ -121,7 +121,9 @@ li {
   float: left;
   width: 100px;
 }
-
+.deckName:hover {
+  color: red;
+}
 .desc {
   float: left;
 }

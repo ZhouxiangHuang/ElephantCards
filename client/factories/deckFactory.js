@@ -2,7 +2,7 @@ angular
   .module('DeckFactory', ['ui.router'])
   .factory('DeckFactory', DeckFactory);
 
-function DeckFactory($http, $q) {
+function DeckFactory($http, $q, UserFactory) {
 
   var factory = {};
 
@@ -28,6 +28,7 @@ function DeckFactory($http, $q) {
 
   //  Add a card to the current deck in the database
   factory.addCard = function(ques, ans) {
+    console.log('INSIDE ADDCARD deckID: ', ans)
     $http.post('/cards/create', {
       deckId: deck.id,
       question: ques,
@@ -37,19 +38,20 @@ function DeckFactory($http, $q) {
     });
   }
 
-  //  Retrieve all decks for the logged in user and store in factory
-  //  FIXME: Username of "Bob" is currently hard-coded in for testing
   factory.getAllDecks = function(user) {
-    var allDecks = $q.defer();
-    $http.post(
-      '/decks', {username: "Bob"}
-    ).success(function(data) {
-      userDecks = data;
-      allDecks.resolve(data);
-    }).error(function(err) {
-      allDecks.reject('Error');
-    });
-    return allDecks.promise;
+
+    return new Promise((resolve, reject) => {
+      $http.post(
+        '/decks', {username: user}
+      ).success(function(data) {
+        if (data[0] !== undefined) {
+          userDecks = data;
+        }
+        resolve(data);
+      }).error(function(err) {
+        reject('Error');
+      });
+    })
   }
 
   //  Retrieve all cards in the current deck and store in factory
@@ -58,9 +60,11 @@ function DeckFactory($http, $q) {
     var allCards = $q.defer();
     $http.post('/cards/read', {deckId: deck.id})
       .success(function(data) {
+      console.log('inside set deck http post: ', data)
       cardsInDeck = data;
       allCards.resolve(data);
     }).error(function(err) {
+      console.log('error in loading cards')
       allCards.reject('There was an error loading all cards');
     });
     return allCards.promise;  //  This return may not be necessary

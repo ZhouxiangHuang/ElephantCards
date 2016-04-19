@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const Sequelize = require('sequelize');
-const connection = new Sequelize('potato', 'potato123', '123', {
+const connection = new Sequelize('elephantdb', 'dumbo', 'peanuts', {
   host: 'localhost',
   dialect: 'postgres',
 });
@@ -23,7 +23,7 @@ router.post('/create', function(req,res) {
 		Cards.create({
 			deckId: req.body.deckId,
 			question: req.body.question,
-			answer: res.body.answer,
+			answer: req.body.answer,
 			numCorrect: 0,
 			displayCount: 0
 	  }).catch(function(error) {
@@ -47,26 +47,26 @@ router.post('/update', function(req,res) {
 });
 
 // user can edit their question and answer, changes will reflect in postgres
-router.post(function(req,res) {
-	Cards.update({
-		question: req.body.question,
-		answer: req.body.answer
-	}, {
-		where: {
-			id: req.body.id
-		}
-	});
-});
+// router.post(function(req,res) {
+// 	Cards.update({
+// 		question: req.body.question,
+// 		answer: req.body.answer
+// 	}, {
+// 		where: {
+// 			id: req.body.id
+// 		}
+// 	});
+// });
 
 // read all cards in 1 deck
 router.post( '/read', function(req, res) {
-	// console.log(req.body);
+	console.log('how about this');
 	Cards.findAll({
 		where: {
 			deckId: req.body.deckId
 		}
 	}).then(function(decksObj) {
-		// res.send()
+		res.send(decksObj)
 	}).catch(function(error) {
 		console.error(error);
 	});

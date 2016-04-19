@@ -15,19 +15,23 @@ function LoginController($scope, UserFactory) {
   //Otherwise a new user will be created
   $scope.login = function() {
     if($scope.loginText) {
-      UserFactory.fetch($scope.username, $scope.password).success(function(user) {
-        if(user === 'error') {
+      console.log('login text is displayed')
+      UserFactory.fetch($scope.username, $scope.password).success(function(dataResponse) {
+        if(dataResponse === 'error') {
           $scope.errorText = 'User/Password is incorrect.'
         } else {
-          $scope.name = 'Hello ' + user;
+          UserFactory.currentUser = dataResponse;
+          $scope.name = 'Hello ' + dataResponse;
           $scope.loggedIn = $scope.logoutButton = true;
           UserFactory.broadcast('createdDecks');
         }
       });
     } else {
+      console.log('insdie create')
       UserFactory.create($scope.username, $scope.password);
       $scope.name = 'Hello ' + $scope.username;
       $scope.loggedIn = $scope.logoutButton = true;
+      UserFactory.broadcast('createdDecks');
     }
   };
 
@@ -43,8 +47,10 @@ function LoginController($scope, UserFactory) {
   $scope.textHandler = function() {
     if($scope.signupText) {
       $scope.signupText = '';
+      console.log('flip 1')
       $scope.loginText = 'Logging in - Click here to create an account.';
     } else {
+        console.log('flip 2')
       $scope.signupText = 'Creating an Account - Click here to login in.';
       $scope.loginText = '';
     }
