@@ -1,0 +1,17 @@
+<!-- <div  id="deckTable" ng-init="decks=[{id: 1, name: 'Animals', description: 'Different types of pets'}, {id: 2, name: 'Countries', description: 'Countries of the world'}, {id: 3, name: 'Food', description: 'Recipes from cookbook'}]"> -->
+
+<div ng-show="currentView === 'createdDecks'" id="deckTable">
+  <h1 ng-click="log()">--Title--</h1>
+  <a ui-sref="create">Create new deck</a>
+  <ul>
+    <li>
+      <span class="deckName">Deck Name</span>
+      <span class="desc">This is a description of the deck</span>
+    </li>
+    <li ng-repeat='deck in decks'>
+      <div ng-click="currentDeck(); setDeck($index)" class="deckName link" >{{ deck.deckname.toUpperCase() }}</div>
+      <span class="desc">{{ deck.description }}</span>
+    </li>
+  </ul>
+  <button ng-click="createDeck()">Create a Deck</button>
+</div>
