@@ -63,7 +63,7 @@ router.post( '/read', function(req, res) {
 	console.log('request body deckID!!!!!', req.body.deckId);
 	Cards.findAll({
 		where: {
-			deckId: 13
+			deckId: req.body.deckId
 		}
 	}).then(function(decksObj) {
     console.log("deckobj:    ", decksObj);
