@@ -19,8 +19,10 @@ function MainController($scope, $state, DeckFactory, UserFactory) {
   $scope.setDeck = function(index) {
     console.log('index: ', index);
     DeckFactory.setDeck(index)
-      .then(function() {
-        $state.go('test');
+      .then(function(data) {
+        console.log("then setDeck in MainController");
+        console.log("data coming back from DeckFactory", data);
+        UserFactory.broadcast('currentDeck');
     });
   }
 

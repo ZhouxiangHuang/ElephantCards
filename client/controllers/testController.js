@@ -15,6 +15,7 @@ function TestController($scope, DeckFactory, UserFactory) {
   $scope.currentView = '';
 
   $scope.$on('handleBroadcast', function(event, status) {
+    console.log("deckfactory's method   ", DeckFactory.loadDeck());
     $scope.currentView = status;
   });
 

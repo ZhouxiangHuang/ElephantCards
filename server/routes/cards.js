@@ -60,12 +60,13 @@ router.post('/update', function(req,res) {
 
 // read all cards in 1 deck
 router.post( '/read', function(req, res) {
-	console.log('how about this');
+	console.log('request body deckID!!!!!', req.body.deckId);
 	Cards.findAll({
 		where: {
-			deckId: req.body.deckId
+			deckId: 13
 		}
 	}).then(function(decksObj) {
+    console.log("deckobj:    ", decksObj);
 		res.send(decksObj)
 	}).catch(function(error) {
 		console.error(error);
