@@ -1,0 +1,15 @@
+<div ng-show="currentView === 'currentDeck'">
+  <h1 id="deckTitle">{{ deckName }}</h1>
+  <div id="card" ui-view>
+  <h5 id="cardSide">{{ cardSide }}</h5>
+  <h1 id="cardText">{{ showText }}</h1>
+  </div>
+  <div id="card-nav">
+  <button ng-click="prevCard()">Previous</button>
+  <button ng-click="flipCard()">Flip</button>
+  <button ng-attr-btn-view="{{ !showQ }}" ng-click="nextCard('N')">Incorrect</button>
+  <button ng-attr-btn-view="{{ !showQ }}" ng-click="nextCard('Y')">Correct</button>
+  <button ng-attr-btn-view="{{ showQ }}" ng-click="nextCard(null)">Next</button>
+  </div>
+  <button ng-click="previousPage()">Decks</a>
+</div>

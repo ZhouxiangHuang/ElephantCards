@@ -1,0 +1,19 @@
+<div  ng-show='currentView === "createDeck"' class="container">
+  <div ng-attr-btn-view="{{ !named }}">
+    <h2>Name your new deck</h2>
+    <input type="text" placeholder="Deck name" ng-model="deckname">
+    <button ng-click="createDeck()">Create Deck</button>
+  </div>
+  <div ng-attr-btn-view="{{ named }}">
+    <h2>{{ deckname }}</h2>
+    <h3>Add cards</h3>
+    <p>Question</p>
+    <textarea ng-model="newQ"></textarea>
+    <p>Answer</p>
+    <textarea ng-model="newA"></textarea>
+    <button ng-click="addCard()">Add Card</button>
+  <div>
+  <button ng-click="previousPage()">Decks</button>
+  </div>
+  </div>
+</div>
