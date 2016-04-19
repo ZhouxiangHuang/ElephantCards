@@ -13,10 +13,17 @@ function TestController($scope, DeckFactory, UserFactory) {
   //  True when question is to be shown; false for answer
   $scope.showQ = true;
   $scope.currentView = '';
-
+  var count = 1;
   $scope.$on('handleBroadcast', function(event, status) {
-    console.log("deckfactory's method   ", DeckFactory.loadDeck());
+
+    console.log('count: ', count, 'status: ', status);
+    count++;
     $scope.currentView = status;
+    if(status === 'currentDeck') {
+      $scope.deckName = DeckFactory.getDeckname();
+      $scope.cards = DeckFactory.loadDeck();
+      $scope.showCard();
+    }
   });
 
   $scope.previousPage = function() {
@@ -26,8 +33,8 @@ function TestController($scope, DeckFactory, UserFactory) {
 
   //  Retrieve array of cards and deck name from factory and display first question
   // $scope.getCards = function() {
-  //   $scope.cards = DeckFactory.loadDeck();
-  //   $scope.deckName = DeckFactory.getDeckname();
+
+
   //   $scope.numCards = $scope.cards.length;
   //   // $scope.showText = $scope.cards[$scope.index].question;
   //   $scope.showCard();
@@ -37,6 +44,7 @@ function TestController($scope, DeckFactory, UserFactory) {
   //  'cardSide' is the text at the top of the card
   $scope.showCard = function() {
     if ($scope.showQ) {
+      console.log('$$$$$$$$$$ $scope.cards[$scope.index]: ', $scope.cards[$scope.index])
       $scope.cardSide = "Question";
       $scope.showText = $scope.cards[$scope.index].question;
     } else {

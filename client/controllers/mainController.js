@@ -26,11 +26,11 @@ function MainController($scope, $state, DeckFactory, UserFactory) {
     });
   }
 
-
+  //ANDREW BURKE turned this off because it was messing with the TestController.  It seems that it was unneccessary.
   //Broadcasts page on click
-  $scope.currentDeck = function() {
-    UserFactory.broadcast('currentDeck');
-  }
+  // $scope.currentDeck = function() {
+  //   UserFactory.broadcast('currentDeck');
+  // }
 
   //Receives broadcast
   $scope.$on('handleBroadcast', function(event, status) {
