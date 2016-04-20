@@ -16,12 +16,6 @@ function MainController($scope, $state, DeckFactory, UserFactory) {
       return true;
     }
     return false;
-    // var allFilters = {};
-    // if($scope.myDecks === true) {
-    //    allFilters.username = UserFactory.currentUser;
-    //    console.log("allFilter      ", allFilters);
-    // }
-    // return allFilters;
   }
 
   //  Retrieves an array of the user's decks from the factory
