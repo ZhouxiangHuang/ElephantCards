@@ -88,5 +88,13 @@ router.post('/delete', function(req, res) {
 		});
 });
 
+router.post('/deleteAll', function(req, res) {
+		Cards.destroy({
+			where: {
+				deckId: req.body.deckId
+			}
+		});
+});
+
 
 module.exports = router;

@@ -3,6 +3,7 @@
   <div>
     <label><input type='checkbox' ng-model='filter.myDecks'>My Decks</label><br>
     <label><input type='checkbox' ng-model='filter.publicDecks'>Public Decks</label><br>
+    <button id="createDeckButton" ng-click="createDeck()">Create a Deck</button>
   </div>
   <table>
     <tr>
@@ -18,5 +19,4 @@
       <td class="rowData">{{ deck.updatedAt }}</td>
     </tr>
   </table>
-  <button ng-click="createDeck()">Create a Deck</button>
 </div>
