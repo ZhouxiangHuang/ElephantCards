@@ -1,8 +1,26 @@
 <div class="jumbotron" ng-show="landingPage === 'landing'">
-  <div class="container">
-    <span id="bootstrap-logo">E</span>
+
     <p id="jumbo-text">Codesmith Group Project</p>
-    <button id="download-bootstrap">Sign up for free!</button>
-    <p id="version-text">Currently Alpha</p>
-  </div>
+
+    <div id="newuser" class="landingBox">
+      <h2>New User?</h2>
+      <form ng-submit="createUser()">
+        <li><input ng-model="createUsername" name="text" type="text" placeholder="username"></li>
+        <li><input ng-model="createPassword" name="text" type="password" placeholder="password"></li>
+        <input class="submit-btn" type="submit" id="submit" value="Submit" />
+      </form>
+      <p ng-model="createError">{{createError}}</p>
+    </div>
+
+    <div id="existinguser" class="landingBox">
+      <h2>Existing User?</h2>
+      <form ng-submit="loginUser()">
+        <li><input ng-model="loginUsername" name="text" type="text" placeholder="username"></li>
+        <li><input ng-model="loginPassword" name="text" type="password" placeholder="password"></li>
+        <input class="submit-btn" type="submit" id="submit" value="Submit" />
+      </form>
+      <p ng-model="loginError">{{loginError}}</p>
+    </div>
+
+
 </div>
