@@ -15,6 +15,7 @@ function CreateController($scope, $q, DeckFactory, UserFactory) {
   });
 
   $scope.previousPage = function () {
+    $scope.named = false;
     $scope.currentView = '';
     DeckFactory.getAllDecks(UserFactory.currentUser);
     UserFactory.broadcast('createdDecks');

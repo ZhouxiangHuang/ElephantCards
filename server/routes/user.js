@@ -18,9 +18,15 @@ router.post('/', function(req, res) {
 
   User.findOne({ where: { username: req.body.username } }).then(function(item) {
     var hashedPassword = bcrypt.hashSync(req.body.password, 10);
-    if(bcrypt.compareSync(req.body.password, item.dataValues.password)) {
-      res.send(req.body.username);
-    } else {
+    if(item) {
+      if(bcrypt.compareSync(req.body.password, item.dataValues.password)) {
+        res.send(req.body.username);
+      }
+      else {
+       res.send('error');
+     }
+    }
+     else {
       res.send('error');
     }
   });
