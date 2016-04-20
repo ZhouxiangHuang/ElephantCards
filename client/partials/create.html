@@ -2,8 +2,9 @@
   <div ng-attr-btn-view="{{ !named }}">
     <h2>Name your new deck</h2>
     <input type="text" placeholder="Deck name" ng-model="deckname">
-    <button ng-click="createDeck()">Create Deck</button><p>{{deckResponse}}</p>
+    <textarea placeholder="Description..." ng-model="description"></textarea>
     <label><input type='checkbox' ng-model='checkbox'>Public</label><br>
+    <button ng-click="createDeck()">Create Deck</button><p>{{deckResponse}}</p>
   </div>
   <div ng-attr-btn-view="{{ named }}">
     <h2>{{ deckname }}</h2>

@@ -15,14 +15,15 @@ function DeckFactory($http, $q, UserFactory) {
   var cardsInDeck = [];
 
   //  Create a new deck in database
-  factory.createDeck = function(username, deckname, checkbox) {
+  factory.createDeck = function(username, deckname, checkbox, description) {
     if(checkbox === undefined) {
       checkbox = false;
     }
     return $http.post('/decks/create', {
       username: username,
       deckname: deckname,
-      public: checkbox
+      public: checkbox,
+      description: description
     }).then(function(res) {
       console.log("deckFactory return from post", res.data);
       if(res.data === "Deck already exists") {

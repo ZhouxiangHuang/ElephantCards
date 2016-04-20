@@ -1,14 +1,22 @@
 <div ng-show="currentView === 'createdDecks'" id="deckTable">
   <h3>My Decks</h3>
-  <ul>
-    <li>
-      <span class="deckName">Deck Name</span>
-      <span class="desc">This is a description of the deck</span>
-    </li>
-    <li ng-repeat='deck in decks'>
-      <div ng-click="currentDeck(); setDeck($index)" class="link deckName" >{{ deck.deckname.toUpperCase() }}</div>
-      <span class="desc">{{ deck.description }}</span>
-    </li>
-  </ul>
+  <div>
+    <label><input type='checkbox' ng-model='filter.myDecks'>My Decks</label><br>
+    <label><input type='checkbox' ng-model='filter.publicDecks'>Public Decks</label><br>
+  </div>
+  <table>
+    <tr>
+      <td class="columnHeader">Deck Name</td>
+      <td class="columnHeader">Description</td>
+      <td class="columnHeader">Created by</td>
+      <td class="columnHeader">Last update</td>
+    </tr>
+    <tr ng-repeat='deck in filtered = (decks | filter: filterData)'>
+      <td ng-click="currentDeck(); setDeck($index)" class="deckName" >{{ deck.deckname.toUpperCase() }}</td>
+      <td class="rowData">{{ deck.description }}</td>
+      <td class="rowData">{{ deck.username }}</td>
+      <td class="rowData">{{ deck.updatedAt }}</td>
+    </tr>
+  </table>
   <button ng-click="createDeck()">Create a Deck</button>
 </div>
