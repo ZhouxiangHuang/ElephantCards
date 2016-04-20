@@ -80,7 +80,7 @@ router.post( '/read', function(req, res) {
 });
 
 // delete card (row in cards)
-router.post(function(req,res) {
+router.post('/delete', function(req, res) {
 		Cards.destroy({
 			where: {
 				id: req.body.id

@@ -13,6 +13,7 @@ function TestController($scope, DeckFactory, UserFactory, UpdateFactory) {
   //  True when question is to be shown; false for answer
   $scope.showQ = true;
   $scope.currentView = '';
+  $scope.deleteCardIndexes = [];
 
   $scope.$on('handleBroadcast', function(event, status) {
     $scope.currentView = status;
@@ -64,9 +65,17 @@ function TestController($scope, DeckFactory, UserFactory, UpdateFactory) {
     }
     else ++$scope.index;
 
-    //  When next card is shown, text should be the question
-    $scope.showQ = true;
-    $scope.showCard();
+    if($scope.deleteCardIndexes.indexOf($scope.index) > -1) {
+      $scope.nextCard();
+    } else if ($scope.numCards === $scope.deleteCardIndexes.length) {
+
+    } else {
+      //  When next card is shown, text should be the question
+      $scope.showQ = true;
+      $scope.showCard();
+    }
+
+
   }
 
 
@@ -81,6 +90,13 @@ function TestController($scope, DeckFactory, UserFactory, UpdateFactory) {
     $scope.cards.forEach(function(card) {
       UpdateFactory.updateScore(card.id, card.numCorrect, card.displayCount);
     });
+  }
+
+  //delete current card from the deck
+  $scope.deleteCard = function() {
+    $scope.deleteCardIndexes.push($scope.index);
+    UpdateFactory.removeCardFromDeck($scope.cards[$scope.index].id);
+
   }
 
 }
