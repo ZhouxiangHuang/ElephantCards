@@ -11,7 +11,8 @@ const connection = new Sequelize('nepjkxqe', 'nepjkxqe', '5cbkWaflhGil6H-ISFmYoj
 var Decks = connection.define('decks', {
 	username: Sequelize.STRING,
 	deckname: Sequelize.STRING,
-  public: Sequelize.BOOLEAN
+  public: Sequelize.BOOLEAN,
+  description: Sequelize.STRING
 })
 
 // create a new deck, insert into postgres
@@ -24,7 +25,8 @@ router.post('/create', function(req,res) {
           Decks.create({
             username: req.body.username,
             deckname: req.body.deckname,
-            public: req.body.public
+            public: req.body.public,
+            description: req.body.description
           }).then(function(newDeck) {
             res.send(newDeck);
           }).catch(function(error) {
@@ -66,7 +68,7 @@ router.post('/', function(req, res) {
 	console.log('router.post req.body: ', req.body.username);
 	Decks.findAll({
 		where: {
-			username: req.body.username
+      $or: [{username: req.body.username}, {public: true}]
 		}
 	}).then(function(decksObj) {
     res.send(decksObj)

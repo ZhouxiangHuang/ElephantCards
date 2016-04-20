@@ -5,6 +5,25 @@ angular
 
 function MainController($scope, $state, DeckFactory, UserFactory) {
   $scope.currentView = 'createdDecks';
+  $scope.filter = {};
+
+
+  $scope.filterData = function(deck) {
+    if ($scope.filter.myDecks && deck.username === UserFactory.currentUser) {
+      return true;
+    }
+    if ($scope.filter.publicDecks && deck.public === true) {
+      return true;
+    }
+    return false;
+    // var allFilters = {};
+    // if($scope.myDecks === true) {
+    //    allFilters.username = UserFactory.currentUser;
+    //    console.log("allFilter      ", allFilters);
+    // }
+    // return allFilters;
+  }
+
   //  Retrieves an array of the user's decks from the factory
   $scope.getAllDecks = function() {
     DeckFactory.getAllDecks(UserFactory.currentUser)
