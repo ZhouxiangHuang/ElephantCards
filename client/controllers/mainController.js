@@ -50,4 +50,20 @@ function MainController($scope, $state, DeckFactory, UserFactory) {
   //  Initialize view
   $scope.getAllDecks();
 
+  $scope.filterData = function(deck) {
+   if ($scope.filter.myDecks && deck.username === UserFactory.currentUser) {
+     return true;
+   }
+   if ($scope.filter.publicDecks && deck.public === true) {
+     return true;
+   }
+   return false;
+   // var allFilters = {};
+   // if($scope.myDecks === true) {
+   //    allFilters.username = UserFactory.currentUser;
+   //    console.log("allFilter      ", allFilters);
+   // }
+   // return allFilters;
+ }
+
 }

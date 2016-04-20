@@ -5,15 +5,18 @@
   <h1 id="cardText">{{ showText }}</h1>
   <h5 id="history">{{ history }}</h5>
   </div>
-  <div id="card-nav">
-  <button ng-click="flipCard()">Flip</button>
-  <button ng-attr-btn-view="{{ !showQ }}" ng-click="nextCard('N')">Incorrect</button>
-  <button ng-attr-btn-view="{{ !showQ }}" ng-click="nextCard('Y')">Correct</button>
-  <button ng-attr-btn-view="{{ showQ }}" ng-click="nextCard(null)">Next</button>
+    <div id="card-nav">
+    <button ng-click="flipCard()">Flip</button>
+    <button ng-attr-btn-view="{{ !showQ }}" ng-click="nextCard('N')">Incorrect</button>
+    <button ng-attr-btn-view="{{ !showQ }}" ng-click="nextCard('Y')">Correct</button>
+    <button ng-attr-btn-view="{{ showQ }}" ng-click="nextCard(null)">Next</button>
   </div>
-  <button ng-click="previousPage()">Decks</a>
-  <button ng-click="logCards()">Save History</a>
-  <button ng-click="deleteCard()">Delete This Card</a>
-  <button ng-click="addMoreCards()">Add Cards To This Deck</a>
-  <button ng-click="deleteDeck()">Delete This Deck</a>
+  <div class='options'>
+    <button ng-click="previousPage()">Decks</a>
+    <button ng-click="logCards()">Save History</a>
+    <button ng-click="deleteCard()">Delete This Card</a>
+    <button ng-click="addMoreCards()">Add Cards To This Deck</a>
+    <button ng-click="deleteDeck()">Delete This Deck</a>
+  </div>
+
 </div>
