@@ -21,9 +21,17 @@ function CreateController($scope, $q, DeckFactory, UserFactory) {
   }
   //  Add new deck to decks table in database
   $scope.createDeck = function() {
-    $scope.named = true;
-    console.log('inside create controller create deck function UserFactory.name: ', UserFactory.currentUser)
-    DeckFactory.createDeck(UserFactory.currentUser, $scope.deckname);
+    // console.log('inside create controller create deck function UserFactory.name: ', UserFactory.currentUser)
+    DeckFactory.createDeck(UserFactory.currentUser, $scope.deckname).then(function(response){
+      if(response === "Deck already exists") {
+        $scope.named = false;
+        $scope.deckResponse = response;
+      }
+      else {
+        console.log("This should print");
+        $scope.named = true;
+      }
+    });
   }
 
   //  Add new card to cards table in database
