@@ -7,7 +7,9 @@ var myApp = angular
     'TestController',
     'MainController',
     'CreateController',
-    'DeckFactory'
+    'DeckFactory',
+    'UpdateFactory'
+
   ]);
 
 myApp.config(function($stateProvider, $urlRouterProvider){

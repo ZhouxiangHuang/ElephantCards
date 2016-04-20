@@ -36,14 +36,20 @@ router.post('/create', function(req,res) {
 // Alter successRate & displayCount as the user views the card
 // and when they get the correct answer
 router.post('/update', function(req,res) {
+  console.log('inside post /update req.body: ', req.body)
 	Cards.update({
 		numCorrect: req.body.numCorrect,
 		displayCount: req.body.displayCount
 	}, {
 		where: {
-			id: cardId
+			id: req.body.id
 		}
-	});
+	}).then(function(data) {
+		console.log('data in update post res: ', data);
+    res.end();
+	}).catch(function(error) {
+    console.error('error: ', error);
+  });;
 });
 
 // user can edit their question and answer, changes will reflect in postgres
@@ -63,7 +69,7 @@ router.post( '/read', function(req, res) {
 	console.log('request body deckID!!!!!', req.body.deckId);
 	Cards.findAll({
 		where: {
-			deckId: 13
+			deckId: 37
 		}
 	}).then(function(decksObj) {
     console.log("deckobj:    ", decksObj);
