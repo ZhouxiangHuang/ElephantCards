@@ -23,6 +23,13 @@ function UpdateFactory($http, $q, UserFactory) {
     })
   }
 
+  factory.removeEntireDeck = function(cardId) {
+    // $http.post('/decks/delete', {
+    //   id: cardId
+    // })
+    return cardId;
+  }
+
   return factory;
 
 }

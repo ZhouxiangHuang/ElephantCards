@@ -61,14 +61,16 @@ function TestController($scope, DeckFactory, UserFactory, UpdateFactory) {
     //  TODO: Randomize next card
     if ($scope.index + 1 === $scope.numCards) {
       $scope.index = 0;
-      $scope.logCards();
     }
     else ++$scope.index;
 
     if($scope.deleteCardIndexes.indexOf($scope.index) > -1) {
-      $scope.nextCard();
-    } else if ($scope.numCards === $scope.deleteCardIndexes.length) {
-
+      console.log('should not happen before a delete')
+      if($scope.numCards !== $scope.deleteCardIndexes.length) {
+        $scope.nextCard();
+      } else {
+        $scope.showText = 'This deck is empty, please delete it or add more cards';
+      }
     } else {
       //  When next card is shown, text should be the question
       $scope.showQ = true;
@@ -96,6 +98,24 @@ function TestController($scope, DeckFactory, UserFactory, UpdateFactory) {
   $scope.deleteCard = function() {
     $scope.deleteCardIndexes.push($scope.index);
     UpdateFactory.removeCardFromDeck($scope.cards[$scope.index].id);
+
+  }
+
+  $scope.addMoreCards = function() {
+    $scope.currentView = '';
+    UserFactory.broadcast('createDeck',  { deckname: $scope.deckName, existingDeck: true });
+  }
+
+  $scope.deleteDeck = function() {
+    console.log('deleteDeck called');
+    $scope.currentView = '';
+    var deleteThisDeck = new Promise((resolve, reject) => {
+        resolve(UpdateFactory.removeEntireDeck($scope.cards[$scope.index].id));
+      });
+    deleteThisDeck.then(data => {
+      console.log(data);
+      UserFactory.broadcast('createdDecks');
+    })
 
   }
 
