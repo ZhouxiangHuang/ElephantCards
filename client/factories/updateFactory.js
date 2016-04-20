@@ -6,15 +6,21 @@ function UpdateFactory($http, $q, UserFactory) {
 
   var factory = {};
 
-  factory.updateScore = function(deckId, numCorrect, displayCount) {
+  factory.updateScore = function(cardId, numCorrect, displayCount) {
     $http.post('/cards/update', {
-      id: deckId,
+      id: cardId,
       numCorrect: numCorrect,
       displayCount: displayCount
     }).then(function(res) {
       console.log('score updated with: ', res.data)
       return res.data;
     });
+  }
+
+  factory.removeCardFromDeck = function(cardId) {
+    $http.post('/cards/delete', {
+      id: cardId
+    })
   }
 
   return factory;
