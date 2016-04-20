@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 const Sequelize = require('sequelize');
-const connection = new Sequelize('elephantdb', 'dumbo', 'peanuts', {
-  host: 'localhost',
+const connection = new Sequelize('nepjkxqe', 'nepjkxqe', '5cbkWaflhGil6H-ISFmYojJW21p7BIhI', {
+  host: 'pellefant-02.db.elephantsql.com',
   dialect: 'postgres',
 });
 

@@ -2,13 +2,13 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('elephantdb', 'dumbo', 'peanuts', {
-  host: 'localhost',
+const connection = new Sequelize('nepjkxqe', 'nepjkxqe', '5cbkWaflhGil6H-ISFmYojJW21p7BIhI', {
+  host: 'pellefant-02.db.elephantsql.com',
   dialect: 'postgres',
 });
 
 //Define User
-var User = sequelize.define('user', {
+var User = connection.define('user', {
   username: {type: Sequelize.STRING, unique: true, allowNull: false},
   password: {type: Sequelize.STRING, allowNull: false}
 });
@@ -35,7 +35,7 @@ router.post('/', function(req, res) {
 //Creates new user in database after bcrypt hash
 router.post('/create', function(req, res) {
   var hashedPassword = bcrypt.hashSync(req.body.password, 10);
-  sequelize.sync().then(function() {
+  connection.sync().then(function() {
     User.findOne({where: { username: req.body.username}}).then(function(item){
       if(!item){
         User.create({

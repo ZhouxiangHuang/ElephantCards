@@ -19,5 +19,4 @@ function LoginController($scope, UserFactory) {
     UserFactory.loggedIn = false;
     UserFactory.broadcast('landing');
   }
-
 }
