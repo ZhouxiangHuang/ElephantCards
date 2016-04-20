@@ -17,9 +17,9 @@ function MainController($scope, $state, DeckFactory, UserFactory) {
   }
 
   //  Select new deck to load into factory, then redirect to test page
-  $scope.setDeck = function(index) {
-    console.log('index: ', index);
-    DeckFactory.setDeck(index)
+  $scope.setDeck = function() {
+    console.log(this.deck.id);
+    DeckFactory.setDeck(this.deck.id)
       .then(function(data) {
         console.log("then setDeck in MainController");
         console.log("data coming back from DeckFactory", data);

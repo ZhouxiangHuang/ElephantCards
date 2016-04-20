@@ -70,8 +70,9 @@ function DeckFactory($http, $q, UserFactory) {
   }
 
   //  Retrieve all cards in the current deck and store in factory
-  factory.setDeck = function(index) {
-    deck = userDecks[index];
+  factory.setDeck = function(id) {
+    deck = userDecks.filter(deck => deck.id === id)[0];
+    console.log('the deck: ', deck)
     var allCards = $q.defer();
     $http.post('/cards/read', {deckId: deck.id})
       .success(function(data) {
