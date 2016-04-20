@@ -11,6 +11,7 @@ const connection = new Sequelize('nepjkxqe', 'nepjkxqe', '5cbkWaflhGil6H-ISFmYoj
 var Decks = connection.define('decks', {
 	username: Sequelize.STRING,
 	deckname: Sequelize.STRING,
+  public: Sequelize.BOOLEAN
 })
 
 // create a new deck, insert into postgres
@@ -22,7 +23,8 @@ router.post('/create', function(req,res) {
         if (result === null) {
           Decks.create({
             username: req.body.username,
-            deckname: req.body.deckname
+            deckname: req.body.deckname,
+            public: req.body.public
           }).then(function(newDeck) {
             res.send(newDeck);
           }).catch(function(error) {

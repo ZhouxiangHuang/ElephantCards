@@ -23,7 +23,7 @@ function CreateController($scope, $q, DeckFactory, UserFactory) {
   //  Add new deck to decks table in database
   $scope.createDeck = function() {
     // console.log('inside create controller create deck function UserFactory.name: ', UserFactory.currentUser)
-    DeckFactory.createDeck(UserFactory.currentUser, $scope.deckname).then(function(response){
+    DeckFactory.createDeck(UserFactory.currentUser, $scope.deckname, $scope.checkbox).then(function(response){
       if(response === "Deck already exists") {
         $scope.named = false;
         $scope.deckResponse = response;
