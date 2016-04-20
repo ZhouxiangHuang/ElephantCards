@@ -50,7 +50,10 @@ function MainController($scope, $state, DeckFactory, UserFactory) {
   //  Initialize view
   $scope.getAllDecks();
 
+  $scope.filter = {};
+
   $scope.filterData = function(deck) {
+    console.log("what is filter   ", $scope.filter);
    if ($scope.filter.myDecks && deck.username === UserFactory.currentUser) {
      return true;
    }
