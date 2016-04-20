@@ -1,7 +1,7 @@
 * {
   overflow: hidden;
   font-family: 'Arial', sans-serif;
-  border: 1px solid green;
+  /*border: 1px solid green;*/
 }
 /*Navbar*/
 .navbar-brand {
@@ -11,7 +11,7 @@
 
 .navbar {
   margin-bottom: 0 !important;
-  background-color: #348ac7;
+  background-color: #c68123;
   border: none !important;
 }
 
@@ -20,14 +20,18 @@
   float: left;
   margin-left: 10px;
 }
-
+.inputPrompt {
+  color: dimgrey;
+}
 .nav input {
   color: black !important;
 }
 .landingBox {
   display: inline-block;
   margin: 10px;
-  background-color: #e7e7e7;
+  background-color: none;
+  border-radius: 3px;
+  padding: 30px;
 }
 .login-create-text {
   display: block;
@@ -52,12 +56,12 @@
 /*Jumbotron*/
 
 .jumbotron {
-  background-color: #348ac7;
+  background-color: #c68123;
   padding: 80px 0 95px 0;
   text-align: center;
   height: 1000px;
-  background-image: -webkit-linear-gradient(top, #348ac7 0%, #83b8de 100%);
-  background-image: linear-gradient(to bottom, #348ac7 0%, #83b8de 100%);
+  background-image: -webkit-linear-gradient(top, #c68123 0%, #83b8de 100%);
+  background-image: linear-gradient(to bottom, #c68123 0%, #83b8de 100%);
 }
 
 #bootstrap-logo {
@@ -96,10 +100,10 @@
 }
 
 body {
-  background-color: #348ac7;
+  background-color: #c68123;
   height: 1000px;
-  background-image: -webkit-linear-gradient(top, #348ac7 0%, #83b8de 100%);
-  background-image: linear-gradient(to bottom, #348ac7 0%, #83b8de 100%);
+  background-image: -webkit-linear-gradient(top, #c68123 0%, #83b8de 100%);
+  background-image: linear-gradient(to bottom, #c68123 0%, #83b8de 100%);
 }
 
 .later {
@@ -121,11 +125,11 @@ li {
 }
 
 .deckName {
-  float: left;
-  width: 100px;
+  padding: 4px;
+  border: 1px solid grey;
 }
 .deckName:hover {
-  color: red;
+  color: lightblue;
 }
 .desc {
   float: left;
@@ -142,7 +146,8 @@ li {
   border: 1px solid #000;
   width: 700px;
   height: 400px;
-  background: #fefefe;
+  background: transparent;
+  border: 1px solid grey;
   text-align: center;
 }
 
@@ -180,4 +185,20 @@ textarea {
 
 #createDeckButton {
   display: inline;
+}
+
+.columnHeader {
+  padding: 4px;
+  border: 1px solid grey;
+}
+
+.rowData {
+  padding: 4px;
+  border: 1px solid grey;
+}
+.options {
+
+  margin: auto;
+  width: 40%;
+  margin-top: 200px;
 }

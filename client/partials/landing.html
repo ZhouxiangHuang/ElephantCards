@@ -3,20 +3,20 @@
     <p id="jumbo-text">Codesmith Group Project</p>
 
     <div id="newuser" class="landingBox">
-      <h2>New User?</h2>
+      <h2 class='inputPrompt'>New User?</h2>
       <form ng-submit="createUser()">
-        <li><input ng-model="createUsername" name="text" type="text" placeholder="username"></li>
-        <li><input ng-model="createPassword" name="text" type="password" placeholder="password"></li>
+        <li><input ng-model="createUsername" name="text" type="text" placeholder="username" class='form-control'></li>
+        <li><input ng-model="createPassword" name="text" type="password" placeholder="password" class='form-control'></li>
         <input class="submit-btn" type="submit" id="submit" value="Submit" />
       </form>
       <p ng-model="createError">{{createError}}</p>
     </div>
 
     <div id="existinguser" class="landingBox">
-      <h2>Existing User?</h2>
+      <h2 class='inputPrompt'>Existing User?</h2>
       <form ng-submit="loginUser()">
-        <li><input ng-model="loginUsername" name="text" type="text" placeholder="username"></li>
-        <li><input ng-model="loginPassword" name="text" type="password" placeholder="password"></li>
+        <li><input ng-model="loginUsername" name="text" type="text" placeholder="username" class='form-control'></li>
+        <li><input ng-model="loginPassword" name="text" type="password" placeholder="password" class='form-control'></li>
         <input class="submit-btn" type="submit" id="submit" value="Submit" />
       </form>
       <p ng-model="loginError">{{loginError}}</p>

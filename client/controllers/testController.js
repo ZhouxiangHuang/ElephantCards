@@ -61,6 +61,7 @@ function TestController($scope, DeckFactory, UserFactory, UpdateFactory) {
     //  TODO: Randomize next card
     if ($scope.index + 1 === $scope.numCards) {
       $scope.index = 0;
+      $scope.logCards();
     }
     else ++$scope.index;
 
