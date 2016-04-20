@@ -10,14 +10,18 @@ function CreateController($scope, $q, DeckFactory, UserFactory) {
   //  FIXME: Username should not be hard-coded in
   $scope.username = UserFactory.currentUser;
   $scope.currentView = '';
-  $scope.$on('handleBroadcast', function(event, status) {
+  $scope.$on('handleBroadcast', function(event, status, data) {
+    if(data !== undefined) {
+        $scope.named = true;
+        $scope.deckname = data.deckname;
+    }
     $scope.currentView = status;
   });
 
   $scope.previousPage = function () {
     $scope.named = false;
     $scope.currentView = '';
-    DeckFactory.getAllDecks(UserFactory.currentUser);
+    // DeckFactory.getAllDecks(UserFactory.currentUser);
     UserFactory.broadcast('createdDecks');
   }
   //  Add new deck to decks table in database

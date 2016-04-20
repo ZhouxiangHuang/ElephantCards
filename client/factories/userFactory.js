@@ -20,7 +20,12 @@ function UserFactory($http, $rootScope) {
   }
 
   user.broadcast = function(status) {
-    $rootScope.$broadcast('handleBroadcast', status)
+    var args = Array.prototype.slice.call(arguments);
+    var data;
+    if(args.length > 1) {
+      data = args[1];
+    }
+    $rootScope.$broadcast('handleBroadcast', status, data)
   }
 
   return user;
