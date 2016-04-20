@@ -2,7 +2,7 @@ angular
   .module('TestController', ['ui.router'])
   .controller('TestController', TestController);
 
-function TestController($scope, DeckFactory, UserFactory) {
+function TestController($scope, DeckFactory, UserFactory, UpdateFactory) {
 
   //  The text to display on the card
   $scope.showText;
@@ -13,15 +13,13 @@ function TestController($scope, DeckFactory, UserFactory) {
   //  True when question is to be shown; false for answer
   $scope.showQ = true;
   $scope.currentView = '';
-  var count = 1;
-  $scope.$on('handleBroadcast', function(event, status) {
 
-    console.log('count: ', count, 'status: ', status);
-    count++;
+  $scope.$on('handleBroadcast', function(event, status) {
     $scope.currentView = status;
     if(status === 'currentDeck') {
       $scope.deckName = DeckFactory.getDeckname();
       $scope.cards = DeckFactory.loadDeck();
+      $scope.numCards = $scope.cards.length;
       $scope.showCard();
     }
   });
@@ -34,8 +32,11 @@ function TestController($scope, DeckFactory, UserFactory) {
   //  Retrieve array of cards and deck name from factory and display first question
   // $scope.getCards = function() {
 
+  $scope.calculateHistory = function(card) {
+    if(card.displayCount === 0) return '.....'
+    return Math.floor(card.numCorrect / card.displayCount * 100) + '%';
+  }
 
-  //   $scope.numCards = $scope.cards.length;
   //   // $scope.showText = $scope.cards[$scope.index].question;
   //   $scope.showCard();
   // }
@@ -44,24 +45,26 @@ function TestController($scope, DeckFactory, UserFactory) {
   //  'cardSide' is the text at the top of the card
   $scope.showCard = function() {
     if ($scope.showQ) {
-      console.log('$$$$$$$$$$ $scope.cards[$scope.index]: ', $scope.cards[$scope.index])
       $scope.cardSide = "Question";
       $scope.showText = $scope.cards[$scope.index].question;
+      $scope.history = $scope.calculateHistory($scope.cards[$scope.index]);
     } else {
       $scope.cardSide = "Answer";
       $scope.showText = $scope.cards[$scope.index].answer;
+      $scope.history = $scope.calculateHistory($scope.cards[$scope.index]);
     }
   }
 
   //  Advance the card when user selects 'next', 'correct', or 'incorrect'
   $scope.nextCard = function(correct) {
 
-    //  TODO: Set up functionality of scoring progress
     if (correct === "Y") $scope.cards[$scope.index].numCorrect++;
     if (correct === "Y" || correct === "N") $scope.cards[$scope.index].displayCount++;
-
     //  TODO: Randomize next card
-    if ($scope.index + 1 >= $scope.numCards) $scope.index = 0;
+    if ($scope.index + 1 === $scope.numCards) {
+      $scope.index = 0;
+      $scope.logCards();
+    }
     else ++$scope.index;
 
     //  When next card is shown, text should be the question
@@ -69,13 +72,6 @@ function TestController($scope, DeckFactory, UserFactory) {
     $scope.showCard();
   }
 
-  //  Change index to previous card. This currently assumes cards are in order
-  $scope.prevCard = function() {
-    if ($scope.index - 1 < 0) $scope.index = $scope.numCards - 1;
-    else --$scope.index;
-    $scope.showQ = true;
-    $scope.showCard();
-  }
 
   //  Alternate between question and answer
   $scope.flipCard = function() {
@@ -87,7 +83,7 @@ function TestController($scope, DeckFactory, UserFactory) {
   //  the user's performance details
   $scope.logCards = function() {
     $scope.cards.forEach(function(card) {
-      DeckFactory.updateScore(card.id, card.numCorrect, card.displayCount);
+      UpdateFactory.updateScore(card.id, card.numCorrect, card.displayCount);
     });
   }
 
