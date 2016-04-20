@@ -1,5 +1,7 @@
 * {
   overflow: hidden;
+  font-family: 'Arial', sans-serif;
+  border: 1px solid green;
 }
 /*Navbar*/
 .navbar-brand {
@@ -98,10 +100,6 @@ body {
   height: 1000px;
   background-image: -webkit-linear-gradient(top, #348ac7 0%, #83b8de 100%);
   background-image: linear-gradient(to bottom, #348ac7 0%, #83b8de 100%);
-}
-
-* {
-  font-family: 'Arial', sans-serif;
 }
 
 .later {
