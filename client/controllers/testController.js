@@ -37,9 +37,6 @@ function TestController($scope, DeckFactory, UserFactory, UpdateFactory) {
     return Math.floor(card.numCorrect / card.displayCount * 100) + '%';
   }
 
-  //   // $scope.showText = $scope.cards[$scope.index].question;
-  //   $scope.showCard();
-  // }
 
   //  Display the appropriate question or answer
   //  'cardSide' is the text at the top of the card
@@ -79,14 +76,11 @@ function TestController($scope, DeckFactory, UserFactory, UpdateFactory) {
     $scope.showCard();
   }
 
-  //  TODO: This function has not been implemented. It should update the database with
-  //  the user's performance details
+  // Update the database with the user's performance details
   $scope.logCards = function() {
     $scope.cards.forEach(function(card) {
       UpdateFactory.updateScore(card.id, card.numCorrect, card.displayCount);
     });
   }
 
-  //  Initialize the create page by calling the getCards function
-  // $scope.getCards();
 }
