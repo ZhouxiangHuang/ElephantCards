@@ -77,5 +77,13 @@ router.post('/', function(req, res) {
 	})
 });
 
-// INPUT: deleteDeck(32);
+router.post('/delete', function(req, res) {
+  console.log('delete post attempted on: ', req.body.deckId)
+		Decks.destroy({
+			where: {
+				id: req.body.deckId
+			}
+		});
+});
+
 module.exports = router;

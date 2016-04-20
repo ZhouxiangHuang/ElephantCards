@@ -55,7 +55,7 @@ function TestController($scope, DeckFactory, UserFactory, UpdateFactory) {
 
   //  Advance the card when user selects 'next', 'correct', or 'incorrect'
   $scope.nextCard = function(correct) {
-
+    console.log('the cards object: ', $scope.cards[0].deckId);
     if (correct === "Y") $scope.cards[$scope.index].numCorrect++;
     if (correct === "Y" || correct === "N") $scope.cards[$scope.index].displayCount++;
     //  TODO: Randomize next card
@@ -110,7 +110,7 @@ function TestController($scope, DeckFactory, UserFactory, UpdateFactory) {
     console.log('deleteDeck called');
     $scope.currentView = '';
     var deleteThisDeck = new Promise((resolve, reject) => {
-        resolve(UpdateFactory.removeEntireDeck($scope.cards[$scope.index].id));
+        resolve(UpdateFactory.removeEntireDeck($scope.cards[0].deckId));
       });
     deleteThisDeck.then(data => {
       console.log(data);
