@@ -14,6 +14,7 @@ function ContentController($scope, UserFactory) {
     $scope.loginError = '';
     UserFactory.fetch($scope.loginUsername, $scope.loginPassword).success(function(dataResponse) {
       if (dataResponse === 'error') {
+        console.log(dataResponse)
         $scope.loginError = 'User/Password is incorrect.'
       } else {
         UserFactory.currentUser = dataResponse;
