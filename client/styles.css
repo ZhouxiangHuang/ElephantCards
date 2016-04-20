@@ -22,7 +22,11 @@
 .nav input {
   color: black !important;
 }
-
+.landingBox {
+  display: inline-block;
+  margin: 10px;
+  background-color: #e7e7e7;
+}
 .login-create-text {
   display: block;
   color: white;

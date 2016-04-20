@@ -4,23 +4,24 @@ angular
 
 function UserFactory($http, $rootScope) {
 
-  currentUser = '';
-  var msgObj = { login: false };
+  var user = {};
+  user.currentUser = '[username]';
+  user.loggedIn = false;
 
-  msgObj.fetch = function(username, password) {
+  user.fetch = function(username, password) {
     var user = {username: username, password: password};
     console.log('inside fetch')
     return $http.post('/users', user);
   }
 
-  msgObj.create = function(username, password) {
+  user.create = function(username, password) {
     var user = {username: username, password: password};
     return $http.post('/users/create', user);
   }
 
-  msgObj.broadcast = function(status) {
+  user.broadcast = function(status) {
     $rootScope.$broadcast('handleBroadcast', status)
   }
 
-  return msgObj;
+  return user;
 }
