@@ -15,17 +15,25 @@ var Decks = connection.define('decks', {
 
 // create a new deck, insert into postgres
 router.post('/create', function(req,res) {
-  console.log('does this even happen: ', req.body)
-	connection.sync().then(function() {
-		Decks.create({
-			username: req.body.username,
-			deckname: req.body.deckname
-		}).then(function(newDeck) {
-			res.send(newDeck);
-		}).catch(function(error) {
-			 console.error(error);
-		})
-	});
+  // console.log('does this even happen: ', req.body)
+  Decks.findOne({where: {username: req.body.username, deckname: req.body.deckname}})
+  .then(function(result) {
+    if (result === null) {
+    connection.sync().then(function() {
+      Decks.create({
+        username: req.body.username,
+        deckname: req.body.deckname
+      }).then(function(newDeck) {
+        res.send(newDeck);
+      }).catch(function(error) {
+        console.error(error);
+      })
+    });
+  }
+  else {
+    res.send("Deck already exists");
+  }
+  })
 });
 
 // delete a deck

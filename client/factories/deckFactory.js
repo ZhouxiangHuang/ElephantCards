@@ -5,7 +5,6 @@ angular
 function DeckFactory($http, $q, UserFactory) {
 
   var factory = {};
-
   //  All decks belonging to the logged in user
   var userDecks = [];
 
@@ -17,12 +16,23 @@ function DeckFactory($http, $q, UserFactory) {
 
   //  Create a new deck in database
   factory.createDeck = function(username, deckname) {
-    $http.post('/decks/create', {
+    return $http.post('/decks/create', {
       username: username,
       deckname: deckname
     }).then(function(res) {
+      console.log("deckFactory return from post", res.data);
+      if(res.data === "Deck already exists") {
+        return new Promise(function(resolve, reject) {
+          resolve(res.data);
+        });
+      }
+      else {
+      console.log("DeckFactory entered else because data doesn't exist", res.data);
       deck = res.data;
-      return res.data;
+      return new Promise(function(resolve, reject) {
+        resolve(res.data);
+      });
+    }
     });
   }
 
