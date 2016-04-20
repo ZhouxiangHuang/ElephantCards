@@ -10,6 +10,7 @@ function MainController($scope, $state, DeckFactory, UserFactory) {
     DeckFactory.getAllDecks(UserFactory.currentUser)
       .then(result => {
         $scope.decks = result;
+        console.log("getAllDecks result: ", result);
         DeckFactory.userDecks = result;
         $scope.$apply($scope.decks);
     });

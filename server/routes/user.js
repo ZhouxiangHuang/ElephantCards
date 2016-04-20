@@ -28,24 +28,23 @@ router.post('/', function(req, res) {
 
 //Creates new user in database after bcrypt hash
 router.post('/create', function(req, res) {
-  User.findOne({where: { username: req.body.username}}).then(function(item){
-    if(!item){
-      var hashedPassword = bcrypt.hashSync(req.body.password, 10);
-      sequelize.sync().then(function() {
+  var hashedPassword = bcrypt.hashSync(req.body.password, 10);
+  sequelize.sync().then(function() {
+    User.findOne({where: { username: req.body.username}}).then(function(item){
+      if(!item){
         User.create({
           username: req.body.username,
           password: hashedPassword,
         }).catch(function(error) {
           console.error(error);
         });
-      });
-      res.send(req.body.username);
-    }
-    else {
-      res.send('error');
-    }
+        res.send(req.body.username);
+        }
+      else {
+        res.send('error');
+      }
+    });
   });
-
 });
 
 module.exports = router;
